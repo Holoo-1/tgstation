@@ -31,21 +31,20 @@
 
 /obj/effect/nettingportal/Initialize(mapload)
 	. = ..()
-	var/obj/item/beacon/teletarget = null
-	for(var/obj/machinery/computer/teleporter/com in GLOB.machines)
-		var/atom/target = com.target_ref?.resolve()
-		if(target)
-			if(com.power_station && com.power_station.teleporter_hub && com.power_station.engaged)
-				teletarget = target
-		else
-			com.target_ref = null
+	var/destination = null
+	if(GLOB.dragnet_beacons.len)
+		//var/obj/item/beacon/teletarget = null
+		//teletarget = pick(GLOB.dragnet_beacons)
+		destination = get_turf(pick(GLOB.dragnet_beacons))
+	else
+		destination = null
 
-	addtimer(CALLBACK(src, PROC_REF(pop), teletarget), 30)
+	addtimer(CALLBACK(src, PROC_REF(pop), destination), 50)
 
-/obj/effect/nettingportal/proc/pop(teletarget)
-	if(teletarget)
+/obj/effect/nettingportal/proc/pop(destination)
+	if(destination)
 		for(var/mob/living/L in get_turf(src))
-			do_teleport(L, teletarget, 2, channel = TELEPORT_CHANNEL_BLUESPACE)//teleport what's in the tile to the beacon
+			do_teleport(L, destination, 2, channel = TELEPORT_CHANNEL_BLUESPACE)//teleport what's in the tile to the beacon
 	else
 		for(var/mob/living/L in get_turf(src))
 			do_teleport(L, L, 15, channel = TELEPORT_CHANNEL_BLUESPACE) //Otherwise it just warps you off somewhere.

@@ -15,6 +15,18 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE | DEPARTMENT_BITFLAG_ENGINEERING | DEPARTMENT_BITFLAG_CARGO | DEPARTMENT_BITFLAG_SECURITY
 
+/datum/design/beacon_dragnet
+	name = "DRAGnet Beacon"
+	desc = "A bluespace beacon used by DRAGnet."
+	id = "beacon_dragnet"
+	build_type = PROTOLATHE
+	materials = list(/datum/material/iron = 150, /datum/material/glass = 100, /datum/material/bluespace = 500)
+	build_path = /obj/item/beacon/dragnet
+	category = list(
+		RND_CATEGORY_EQUIPMENT + RND_SUBCATEGORY_EQUIPMENT_BLUESPACE
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
 /datum/design/bag_holding
 	name = "Inert Bag of Holding"
 	desc = "A block of metal ready to be transformed into a bag of holding with a bluespace anomaly core."

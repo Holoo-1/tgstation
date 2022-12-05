@@ -39,6 +39,47 @@
 		if(new_name)
 			name = new_name
 			renamed = TRUE
-		return
+			return
 	else
 		return ..()
+
+/obj/item/beacon/dragnet
+	name = "\improper tracking beacon"
+	desc = "A beacon used by a DRAGnet to deliver criminals. The technology is "
+	icon_state = "beacon-off"
+	enabled = FALSE
+
+/obj/item/beacon/dragnet/attack_self(mob/user)
+	enabled = !enabled
+	if (enabled)
+		icon_state = "beacon-dragnet"
+		GLOB.dragnet_beacons += src
+	else
+		icon_state = "beacon-off"
+		GLOB.dragnet_beacons -= src
+	to_chat(user, span_notice("You [enabled ? "enable" : "disable"] the beacon."))
+	return
+
+/obj/item/beacon/dragnet/attackby(obj/item/W, mob/user)
+	if(istype(W, /obj/item/pen)) // needed for things that use custom names like the locator
+		var/new_name = tgui_input_text(user, "What would you like the name to be?", "Beacon", max_length = MAX_NAME_LEN)
+		if(!user.canUseTopic(src, be_close = TRUE))
+			return
+		if(new_name)
+			name = new_name
+			renamed = TRUE
+		return
+	/*
+	if(istype(W, /obj/item/gun/energy/e_gun/dragnet))
+		if(!enabled)
+			balloon_alert(user, "not turned on")
+			return
+		if(w.dragnet_destination)
+			balloon_alert(user, "unlinked")
+			w.dragnet_destination = null
+		if(enabled && !w.dragnet_destination)
+			balloon_alert(user, "linked")
+			w.dragnet_destination = src
+			return
+	else*/
+	return ..()

@@ -681,13 +681,14 @@
 	description = "Application of Bluespace for static teleportation technology."
 	prereq_ids = list("practical_bluespace")
 	design_ids = list(
+		"beacon_dragnet",
 		"bluespace_pod",
 		"launchpad",
 		"launchpad_console",
 		"quantumpad",
 		"tele_hub",
 		"tele_station",
-		"teleconsole",
+		"teleconsole"
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 5000)
 	discount_experiments = list(/datum/experiment/scanning/points/machinery_tiered_scan/tier3_bluespacemachines = 4000)

@@ -69,17 +69,4 @@
 			name = new_name
 			renamed = TRUE
 		return
-	/*
-	if(istype(W, /obj/item/gun/energy/e_gun/dragnet))
-		if(!enabled)
-			balloon_alert(user, "not turned on")
-			return
-		if(w.dragnet_destination)
-			balloon_alert(user, "unlinked")
-			w.dragnet_destination = null
-		if(enabled && !w.dragnet_destination)
-			balloon_alert(user, "linked")
-			w.dragnet_destination = src
-			return
-	else*/
 	return ..()

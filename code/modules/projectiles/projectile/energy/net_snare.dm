@@ -33,8 +33,6 @@
 	. = ..()
 	var/destination = null
 	if(GLOB.dragnet_beacons.len)
-		//var/obj/item/beacon/teletarget = null
-		//teletarget = pick(GLOB.dragnet_beacons)
 		destination = get_turf(pick(GLOB.dragnet_beacons))
 	else
 		destination = null

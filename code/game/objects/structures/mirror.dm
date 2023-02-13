@@ -155,8 +155,9 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/mirror, 28)
 	selectable_races = sort_list(selectable_races)
 
 /obj/structure/mirror/magic/attack_hand(mob/user, list/modifiers)
-	. = ..()
 	if(.)
+		return TRUE
+	if(broken || !Adjacent(user))
 		return TRUE
 	if(!ishuman(user))
 		return TRUE

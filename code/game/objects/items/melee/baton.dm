@@ -655,6 +655,23 @@
 	playsound(src, SFX_SPARKS, 75, TRUE, -1)
 	update_appearance()
 
+/obj/item/melee/baton/security/on_offer_taken(mob/living/carbon/offerer, mob/living/carbon/taker)
+	if(!active || !HAS_TRAIT(taker, TRAIT_CLUMSY))
+		return
+
+	offerer.visible_message(span_danger("[taker] accidentally takes [src] from wrong side! What a goofus!"), span_userdanger("You try to take with [src] by its orange handle!"))
+	taker.Knockdown(clumsy_knockdown_time)
+	taker.apply_damage(stamina_damage, STAMINA)
+	additional_effects_non_cyborg(taker, offerer)
+	taker.drop_all_held_items()
+	if(on_stun_sound)
+		playsound(get_turf(src), on_stun_sound, on_stun_volume, TRUE, -1)
+	log_combat(offerer, taker, "accidentally takes offered [src] from wrong side due to their clumsiness.", src)
+	if(stun_animation)
+		taker.do_attack_animation(taker)
+	return
+
+
 /obj/item/melee/baton/security/loaded //this one starts with a cell pre-installed.
 	preload_cell_type = /obj/item/stock_parts/cell/high
 
